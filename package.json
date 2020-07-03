@@ -1,0 +1,17 @@
+{
+  "name": "SQLiteTest",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "nodemon main.js",
+    "createTable": "node ./database/TableCreation/TablesUp.js",
+    "dropTable": "node ./database/TableCreation/TablesDown.js"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.4",
+    "sqlite3": "^5.0.0"
+  }
+}
