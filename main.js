@@ -1,1 +1,0 @@
-const exec = require('child_process').exec; //TODO: use exec to make some things with command terminal.

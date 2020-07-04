@@ -1,12 +1,8 @@
 const sqlite = require('sqlite3').verbose();
-const fs = require('fs');
-
-const json = JSON.parse(fs.readFileSync('./package.json'));
 
 class Connection {
-    constructor(db) {
-        this.db = new sqlite.Database(db, sqlite.OPEN_READWRITE);
-        console.log(json);
+    constructor(dbDirectory) {
+        this.db = new sqlite.Database(dbDirectory, sqlite.OPEN_READWRITE);
     }
 
     insertOnDB(table, configObject) {
