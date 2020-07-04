@@ -1,11 +1,32 @@
 const sqlite = require('sqlite3').verbose();
+const fs = require('fs');
 
-class connection {
+const json = JSON.parse(fs.readFileSync('./package.json'));
+
+class Connection {
     constructor(db) {
-        this.db = sqlite.Database(db, sqlite.OPEN_READWRITE);
+        this.db = new sqlite.Database(db, sqlite.OPEN_READWRITE);
+        console.log(json);
     }
 
+    insertOnDB(table, configObject) {
+        const db = this.db;
+        const objectArray = Object.entries(configObject);
+
+        const column = [];
+        const value = [];
+
+        objectArray.forEach(item => {
+            column.push(item[0]);
+            value.push(item[1]);
+        });
+
+        db.serialize(() => {
+            db.run(`INSERT INTO ${table} (${column.join(',')}) VALUES (${'"' + value.join('", "') + '"'})`);
+        });
+
+    }
 
 }
 
-module.exports = connection;
+module.exports = Connection;
