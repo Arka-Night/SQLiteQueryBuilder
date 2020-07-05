@@ -1,4 +1,5 @@
 /node_modules
 /database/db.sqlite
-/devMain.js
 yarn.lock
+/debug
+/sqlite-config.json

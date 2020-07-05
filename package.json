@@ -1,16 +1,10 @@
 {
   "name": "sqlite-qb",
-  "version": "1.0.3",
+  "version": "1.0.6",
   "main": "database/Import/dbConnection.js",
-  "scripts": {
-    "start": "nodemon main.js",
-    "devMode": "nodemon devMain.js",
-    "createTable": "node ./database/TableCreation/TablesUp.js",
-    "dropTable": "node ./database/TableCreation/TablesDown.js"
-  },
   "license": "MIT",
   "bin": {
-    "SQB": "./bin/main.js"
+    "sqb": "./bin/main.js"
   },
   "dependencies": {
     "child_process": "^1.0.2",

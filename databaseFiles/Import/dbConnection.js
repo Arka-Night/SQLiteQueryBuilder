@@ -3,6 +3,7 @@ const sqlite = require('sqlite3').verbose();
 class Connection {
     constructor(dbDirectory) {
         this.db = new sqlite.Database(dbDirectory, sqlite.OPEN_READWRITE);
+        this.dbDirectory = dbDirectory;
     }
 
     insertOnDB(table, configObject) {
