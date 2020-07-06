@@ -1,46 +1,20 @@
 // const exec = require('child_process').exec; TODO: use exec to make some things with command terminal.
-const fs = require('fs');
+const { cmd, stringCommands } = require('../Commands/cmd');
 
-const CreateTable = require('../BaseScriptFiles/CreateTable.js');
-const currentDirectory = process.cwd();
+if(process.argv[2] !== undefined) {
+    const verify = stringCommands.indexOf(process.argv[2]);
 
-let configFile;
-try {   
-    configFile = require(process.cwd() + '/sqlite-config.json');
+    if(verify > -1) {
+        Object.entries(cmd).forEach((com) => {
+            if(process.argv[2] === com[0]) {
+                com[1][0]();
+            }
+        });
+    }else {
+        console.log("\x1b[31m%s\x1b[0m", "This command doesn't exists");
+    }
+} else {
+    const package = require("../package.json");
 
-} catch(err) {
-    throw new Error('no config file to query builder!');
-
+    console.log("\x1b[33m%s\x1b[0m", package.version);
 }
-
-fs.readdir(currentDirectory + configFile.MigrationsPath, (err, files) => {
-    if(err) {
-        throw new Error('The config directory to migrations is invalid.');
-    }
-
-    let isCreated = false;
-    let dbCreated = false;
-    files.forEach(item => {if(item === 'CreateTable.js') isCreated = true; if(item === 'db.sqlite') dbCreated = true;});
-
-    if(!isCreated) {
-        fs.appendFile(currentDirectory + configFile.MigrationsPath + '/CreateTable.js', CreateTable, (err) => {
-            if(err) {
-                console.log(err);
-            }
-
-            console.log('Table created.');
-        });
-    }
-
-    if(!dbCreated) {
-        fs.open(currentDirectory + configFile.DBPath + '/db.sqlite', 'a', (err) => {
-            if(err) {
-                console.log(err);
-            }
-
-            console.log('Database created.');
-        });
-    }
-});
-
-console.log(configFile);

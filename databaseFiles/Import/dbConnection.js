@@ -1,8 +1,15 @@
 const sqlite = require('sqlite3').verbose();
+const path = require('path');
+const fs = require('fs');
 
 class Connection {
-    constructor(dbDirectory) {
-        this.db = new sqlite.Database(dbDirectory, sqlite.OPEN_READWRITE);
+    constructor(configFile) {
+        if(!configFile) {
+            throw new Error('No config file parsed');
+        }
+        this.dbDirectory = path.join(process.cwd(), configFile.DBPath + '/db.sqlite');
+        fs.readFileSync(this.dbDirectory);
+        this.db = new sqlite.Database(this.dbDirectory, sqlite.OPEN_READWRITE);
     }
 
     insertOnDB(table, configObject) {
