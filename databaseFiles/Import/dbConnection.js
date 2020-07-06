@@ -7,7 +7,7 @@ class Connection {
         if(!configFile) {
             throw new Error('No config file parsed');
         }
-        this.dbDirectory = path.join(process.cwd(), configFile.DBPath + '/db.sqlite');
+        this.dbDirectory = path.join(configFile.DirectoryHelper, configFile.DBPath + '/db.sqlite');
         fs.readFileSync(this.dbDirectory);
         this.db = new sqlite.Database(this.dbDirectory, sqlite.OPEN_READWRITE);
     }
@@ -25,7 +25,7 @@ class Connection {
         });
 
         db.serialize(() => {
-            db.run(`INSERT INTO ${table} (${column.join(',')}) VALUES (${'"' + value.join('", "') + '"'})`);
+            db.run(`INSERT INTO ${table} (${column.join(', ')}) VALUES (${'"' + value.join('", "') + '"'})`);
         });
 
     }

@@ -14,7 +14,7 @@ if(process.argv[2] !== undefined) {
         console.log("\x1b[31m%s\x1b[0m", "This command doesn't exists");
     }
 } else {
-    const package = require("../package.json");
+    const { version } = require("../package.json");
 
-    console.log("\x1b[33m%s\x1b[0m", package.version);
+    console.log("\x1b[33m%s\x1b[0m", version);
 }

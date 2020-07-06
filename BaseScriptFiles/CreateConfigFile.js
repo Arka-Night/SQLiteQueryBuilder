@@ -2,5 +2,6 @@ module.exports = `{
     "DBPath": "/",
     "MigrationsPath": "/",
     
-    "DirectoryHelper": "the directory maybe be relative with your config file directory, and the config file maybe be in the same directory of the package file"
+    "DirectoryHelper": "${process.cwd().replace(/\\/g, '/')}",
+    "DirectoryHelp": "Directory helper maybe be the directory where this config file is located, and the paths in top maybe be relative with this config file"
 }`

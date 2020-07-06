@@ -11,7 +11,7 @@ module.exports = [
                 if(err) {
                     console.log(err);
                 }
-                files.forEach(file => {if(file === 'sqlite-config.json') {throw new Error('You already init the builder here');}})
+                files.forEach(file => {if(file === 'sqlite-config.json') {throw new Error('You already init the builder here');}});
 
                 fs.appendFile(currentDirectory + '/sqlite-config.json', CreateConfigFile, (err) => {
                     if(err) {
@@ -19,7 +19,7 @@ module.exports = [
                     }
 
                     console.log("\x1b[32m%s\x1b[0m", 'Config file is created');
-                })
+                });
 
             });
         },
@@ -36,7 +36,7 @@ module.exports = [
                 throw new Error("You doesn't initialize the builder in this folder");
             }
 
-            fs.readdir(path.join(currentDirectory, configFile.DBPath), (err, files) => {
+            fs.readdir(path.join(configFile.DirectoryHelper, configFile.DBPath), (err, files) => {
                 if(err) {
                     throw new Error('The config directory to database is invalid.');
                 }
@@ -45,7 +45,7 @@ module.exports = [
                 files.forEach(item => {if(item === 'db.sqlite') dbCreated = true;});
             
                 if(!dbCreated) {
-                    fs.open(path.join(currentDirectory, configFile.DBPath) + '/db.sqlite', 'a', (err) => {
+                    fs.open(path.join(configFile.DirectoryHelper, configFile.DBPath) + '/db.sqlite', 'a', (err) => {
                         if(err) {
                             console.log(err);
                         }
@@ -70,7 +70,7 @@ module.exports = [
                 throw new Error("You doesn't initialize the builder in this folder");
             }
 
-            fs.readdir(path.join(currentDirectory, configFile.MigrationsPath), (err, files) => {
+            fs.readdir(path.join(configFile.DirectoryHelper, configFile.MigrationsPath), (err, files) => {
                 if(err) {
                     throw new Error('The config directory to migrations is invalid.');
                 }
@@ -85,7 +85,7 @@ module.exports = [
                 files.forEach(item => {if(item === tableName) isCreated = true;});
             
                 if(!isCreated) {
-                    fs.appendFile(path.join(currentDirectory, configFile.MigrationsPath) + `/${tableName}.js`, CreateTable, (err) => {
+                    fs.appendFile(path.join(configFile.DirectoryHelper, configFile.MigrationsPath) + `/${tableName}.js`, CreateTable, (err) => {
                         if(err) {
                             console.log(err);
                         }
