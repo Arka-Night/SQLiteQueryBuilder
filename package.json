@@ -3,9 +3,6 @@
   "version": "1.0.10",
   "main": "database/Import/dbConnection.js",
   "license": "MIT",
-  "scripts": {
-    "start": "node ./debug/tmp.js"
-  },
   "bin": {
     "sqb": "./bin/main.js"
   },
