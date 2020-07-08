@@ -1,11 +1,11 @@
 {
   "name": "sqlite-qb",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "main": "database/Import/dbConnection.js",
   "author": "Elon Pereira Neto",
   "repository": {
     "type": "git",
-    "directory": "https://github.com/HmCapitalista/SQLiteQueryBuilder"
+    "url": "https://github.com/HmCapitalista/SQLiteQueryBuilder"
   },
   "license": "MIT",
   "bin": {

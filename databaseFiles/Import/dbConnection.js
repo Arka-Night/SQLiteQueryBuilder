@@ -2,6 +2,8 @@ const sqlite = require('sqlite3').verbose();
 const path = require('path');
 const fs = require('fs');
 
+const Table = require('../Lib/classes');
+
 class Connection {
     constructor(configFile) {
         if(!configFile) {
@@ -9,24 +11,40 @@ class Connection {
         }
         this.dbDirectory = path.join(configFile.DirectoryHelper, configFile.DBPath + '/db.sqlite');
         fs.readFileSync(this.dbDirectory);
-        this.db = new sqlite.Database(this.dbDirectory, sqlite.OPEN_READWRITE);
+        this.db = new sqlite.Database(this.dbDirectory);
     }
 
-    insertOnDB(table, configObject) {
+    connectInTable(table) {
+        this.db.run('SELECT * FROM PEOPLE', (err) => {
+            if(err) {
+                throw new Error(err);
+            }
+        });
+
+        const tab = new Table(this.db, table);
+
+        return tab;
+        
+    }
+
+    async getAllTables() {
         const db = this.db;
-        const objectArray = Object.entries(configObject);
 
-        const column = [];
-        const value = [];
-
-        objectArray.forEach(item => {
-            column.push(item[0]);
-            value.push(item[1]);
+        const prom = new Promise((resolve, reject) => {
+            db.all('SELECT * FROM sqlite_master WHERE type = "table" AND name NOT LIKE "sqlite_%"', (err, rows) => {
+                if(err) {
+                    reject(err);
+                } else {
+                    const tables = [];
+                    rows.forEach((row) => {
+                        tables.push(row.name);
+                    });
+                    resolve(tables);
+                }
+            });
         });
 
-        db.serialize(() => {
-            db.run(`INSERT INTO ${table} (${column.join(', ')}) VALUES (${'"' + value.join('", "') + '"'})`);
-        });
+        return await prom.then(tables => tables).catch((err) => {throw new Error(err)});
 
     }
 
