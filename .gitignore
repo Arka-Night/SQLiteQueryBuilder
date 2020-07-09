@@ -2,4 +2,3 @@
 yarn.lock
 /debug
 /sqlite-config.json
-/databaseFiles/TableCreation

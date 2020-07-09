@@ -1,4 +1,4 @@
-#! /usr/bin/env node
+#!/usr/bin/env node
 // const exec = require('child_process').exec; TODO: use exec to make some things with command terminal.
 const { cmd, stringCommands } = require('../Commands/cmd');
 

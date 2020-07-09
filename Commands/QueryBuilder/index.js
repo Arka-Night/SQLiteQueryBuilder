@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const { build, drop } = require('./builder');
 
 const CreateConfigFile = require('../../BaseScriptFiles/CreateConfigFile');
 const currentDirectory = process.cwd();
@@ -97,5 +98,68 @@ module.exports = [
         },
 
         "Initialize a migration in specified directory in config file",
+    ],
+
+    [
+        function upTables() {
+            let configFile;
+            try{
+                configFile = require(currentDirectory + '/sqlite-config.json');
+            }catch(err) {
+                throw new Error("You doesn't initialize the builder in this folder");
+            }
+            
+            const migrationsPath = path.join(configFile.DirectoryHelper, configFile.MigrationsPath);
+            fs.readdir(migrationsPath, (err, files) => {
+                if(err) {
+                    throw new Error(err);
+                }
+
+                files.forEach((file) => {build(require(path.join(migrationsPath, file)), path.join(configFile.DirectoryHelper, configFile.DBPath, '/db.sqlite'))});
+
+                console.log("\x1b[32m%s\x1b[0m", 'Tables has update');
+            });
+        },
+
+        'Up the tables to database',
+    ],
+
+    [
+        function dropTables() {
+            let configFile;
+            try{
+                configFile = require(currentDirectory + '/sqlite-config.json');
+            }catch(err) {
+                throw new Error("You doesn't initialize the builder in this folder");
+            }
+            
+            const migrationsPath = path.join(configFile.DirectoryHelper, configFile.MigrationsPath);
+            fs.readdir(migrationsPath, (err, files) => {
+                if(err) {
+                    throw new Error(err);
+                }
+
+                if(process.argv[3]) {
+                    files.forEach((file) => {
+                        if(file === process.argv[3]) {
+                            drop(require(path.join(migrationsPath, file)), path.join(configFile.DirectoryHelper, configFile.DBPath, '/db.sqlite'));
+                            console.log("\x1b[32m%s\x1b[0m", 'Table has dropped');
+
+                        } else {
+                            throw new Error('This file doesn\'t exists');
+
+                        }
+                    });
+
+                } else {
+                    files.forEach((file) => {drop(require(path.join(migrationsPath, file)), path.join(configFile.DirectoryHelper, configFile.DBPath, '/db.sqlite'))});
+                    console.log("\x1b[32m%s\x1b[0m", 'Tables has dropped');
+
+                }
+
+            });
+        },
+
+        "Drop every table in the database if arg doesn't exists, and drop the specified table else",
     ],
 ];
