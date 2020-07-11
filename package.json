@@ -1,6 +1,6 @@
 {
   "name": "sqlite-qb",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "main": "database/Import/dbConnection.js",
   "author": "Elon Pereira Neto",
   "repository": {
