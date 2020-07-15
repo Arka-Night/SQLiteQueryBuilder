@@ -1,6 +1,11 @@
 // const exec = require('child_process').exec; TODO: use exec to make some things with command terminal.
-
 const { cmd, stringCommands } = require('../Commands/cmd');
+const Connection = require('../databaseFiles/Import/dbConnection');
+
+const connect = new Connection(__dirname + './../debug/database/db.sqlite');
+
+console.log(connect);
+
 
 
 if(process.argv[2] !== undefined) {

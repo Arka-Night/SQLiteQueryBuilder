@@ -1,9 +1,14 @@
 const sqlite = require('sqlite3').verbose();
+const fs = require('fs');
 
 class Connection {
     constructor(dbDirectory) {
-        this.db = new sqlite.Database(dbDirectory, sqlite.OPEN_READWRITE);
-        this.dbDirectory = dbDirectory;
+        fs.readFile(dbDirectory, (err, file) => {
+            console.log(file);
+        });
+        console.log(fs.realpathSync('.'));
+        this.dbDirectory = fs.realpathSync(dbDirectory);
+        this.db = new sqlite.Database(this.dbDirectory, sqlite.OPEN_READWRITE);
     }
 
     insertOnDB(table, configObject) {

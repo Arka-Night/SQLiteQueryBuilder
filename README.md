@@ -1,7 +1,7 @@
 A sqlite3 query builder
 (Not use at now, because is incomplete)
 
-Install globally
+Install globally to use the builder, and locally to use the database api.
 
 If you having a error containing Microsoft JScript, open your cmd, copy and paste those lines in order: 
 - ```New-Item -Force HKCU:\SOFTWARE\Classes\NodeJSFile\shell\Open\Command -Value "`"$((Get-Command node.exe).Source)`" `"%1`" %*"```
