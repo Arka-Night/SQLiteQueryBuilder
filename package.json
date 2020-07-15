@@ -1,7 +1,12 @@
 {
   "name": "sqlite-qb",
-  "version": "1.0.9",
-  "main": "databaseFiles/Import/dbConnection.js",
+  "version": "1.0.14",
+  "main": "database/Import/dbConnection.js",
+  "author": "Elon Pereira Neto",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HmCapitalista/SQLiteQueryBuilder"
+  },
   "license": "MIT",
   "scripts": {
     "start": "node ./bin/main.js"
@@ -10,9 +15,6 @@
     "sqb": "./bin/main.js"
   },
   "dependencies": {
-    "knex": "^0.21.1",
-    "readline": "^1.3.0",
-    "sqlite-qb": "^1.0.9",
     "sqlite3": "^5.0.0"
   },
   "preferGlobal": true

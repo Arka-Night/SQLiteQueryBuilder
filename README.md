@@ -3,10 +3,8 @@ A sqlite3 query builder
 
 Install globally to use the builder, and locally to use the database api.
 
-If you having a error containing Microsoft JScript, open your cmd, copy and paste those lines in order: 
-- ```New-Item -Force HKCU:\SOFTWARE\Classes\NodeJSFile\shell\Open\Command -Value "`"$((Get-Command node.exe).Source)`" `"%1`" %*"```
-- `New-Item -Force HKCU:\SOFTWARE\Classes\.js -Value 'NodeJSFile'`
-
 GitHub repo: https://github.com/HmCapitalista/SQLiteQueryBuilder
 
 Author: Elon Pereira Neto  Vulgo Hm_Capitalista
+
+The launch will be in the 1.1.0
