@@ -78,9 +78,9 @@ function primarySeparator(columns) {
 
 }
 
-function compiler(tableName) {
+function compiler(tableName, this_columns) {
     let sql = `CREATE TABLE ${tableName} (`;
-    const columns = Object.entries(this.columns);
+    const columns = Object.entries(this_columns);
 
     const { types, bools } = typeSeparator(columns);
     const { primarys, isPrimaryOne } = primarySeparator(columns);
@@ -104,7 +104,31 @@ function compiler(tableName) {
     if(Object.keys(maxLenght).length > 0 || bools !== null) {
         sql += ', CHECK('
 
-        //TODO: maxLenght and bools
+        if(bools !== null) {
+            bools.forEach((column, index) => {
+                sql += `${column} == 0 OR ${column} == 1`;
+
+                if(index+1 === bools.length) {
+                    return;
+                }
+                sql += ' AND ';
+            });
+        }
+
+        if(Object.keys(maxLenght).length > 0) {
+            if(bools !== null) {
+                sql += ' AND ';
+            }
+
+            Object.entries(maxLenght).forEach((column, index) => {
+                sql += `length(${column[0]}) <= ${column[1]}`
+
+                if(index+1 === Object.keys(maxLenght).length) {
+                    return;
+                }
+                sql += ' AND ';
+            });
+        }
 
         sql += ')';
     }
@@ -128,7 +152,7 @@ function compiler(tableName) {
 
     sql += ');';
 
-    console.log(sql);
+    return sql;
 }
 
 module.exports = compiler;

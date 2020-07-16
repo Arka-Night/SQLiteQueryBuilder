@@ -19,8 +19,6 @@ class Column {
             } */
         };
 
-        this.compiler = compiler;
-
     }
 
     getColumns() {
