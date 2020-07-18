@@ -121,33 +121,32 @@ function primary(columnName, columns) {
     }
 }
 
-function foreignKey(columnName, columns, col, reference, config = null) {
-    column = columns[columnName];
+function foreignKey(columnName, columns, column, reference, config = null) {
     columns[columnName].foreignKey = {};
-    columns[columnName].foreignKey.reference = reference;
-    columns[columnName].foreignKey.referenceOn = col;
+    columns[columnName].foreignKey.reference = column;
+    columns[columnName].foreignKey.referenceOn = reference;
 
     if(config) {
         if(config.ondelete) {
             switch(config.ondelete.toLowerCase()) {
                 case 'cascade': 
-                    columns[columnName].foreignKey.ondelete = config.ondelete;
+                    columns[columnName].foreignKey.ondelete = config.ondelete.toUpperCase();
                     break;
                 
                 case 'set null': 
-                    columns[columnName].foreignKey.ondelete = config.ondelete;
+                    columns[columnName].foreignKey.ondelete = config.ondelete.toUpperCase();
                     break;
                 
                 case 'set default':
-                    columns[columnName].foreignKey.ondelete = config.ondelete;
+                    columns[columnName].foreignKey.ondelete = config.ondelete.toUpperCase();
                     break;
 
                 case 'restrict':
-                    columns[columnName].foreignKey.ondelete = config.ondelete;
+                    columns[columnName].foreignKey.ondelete = config.ondelete.toUpperCase();
                     break;
 
                 case 'no action':
-                    columns[columnName].foreignKey.ondelete = config.ondelete;
+                    columns[columnName].foreignKey.ondelete = config.ondelete.toUpperCase();
                     break;
 
                 default: 
@@ -160,23 +159,23 @@ function foreignKey(columnName, columns, col, reference, config = null) {
         if(config.onupdate) {
             switch(config.onupdate.toLowerCase()) {
                 case 'cascade': 
-                    columns[columnName].foreignKey.onupdate = config.onupdate;
+                    columns[columnName].foreignKey.onupdate = config.onupdate.toUpperCase();
                     break;
                 
                 case 'set null': 
-                    columns[columnName].foreignKey.onupdate = config.onupdate;
+                    columns[columnName].foreignKey.onupdate = config.onupdate.toUpperCase();
                     break;
                 
                 case 'set default':
-                    columns[columnName].foreignKey.onupdate = config.onupdate;
+                    columns[columnName].foreignKey.onupdate = config.onupdate.toUpperCase();
                     break;
 
                 case 'restrict':
-                    columns[columnName].foreignKey.onupdate = config.onupdate;
+                    columns[columnName].foreignKey.onupdate = config.onupdate.toUpperCase();
                     break;
 
                 case 'no action':
-                    columns[columnName].foreignKey.onupdate = config.onupdate;
+                    columns[columnName].foreignKey.onupdate = config.onupdate.toUpperCase();
                     break;
 
                 default: 

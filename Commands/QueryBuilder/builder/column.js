@@ -55,7 +55,7 @@ class Column {
         }
     } 
 
-    int(columnName) {
+    integer(columnName) {
         if(this.columns[columnName]) {
             throw new Error('Column already exists');
         }
