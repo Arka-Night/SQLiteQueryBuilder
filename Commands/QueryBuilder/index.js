@@ -115,9 +115,7 @@ module.exports = [
                     throw new Error(err);
                 }
 
-                files.forEach((file) => {build(require(path.join(migrationsPath, file)), path.join(configFile.DirectoryHelper, configFile.DBPath, '/db.sqlite'))});
-
-                console.log("\x1b[32m%s\x1b[0m", 'Tables has update');
+                build(files, migrationsPath, configFile);
             });
         },
 
@@ -139,23 +137,7 @@ module.exports = [
                     throw new Error(err);
                 }
 
-                if(process.argv[3]) {
-                    files.forEach((file) => {
-                        if(file === process.argv[3]) {
-                            drop(require(path.join(migrationsPath, file)), path.join(configFile.DirectoryHelper, configFile.DBPath, '/db.sqlite'));
-                            console.log("\x1b[32m%s\x1b[0m", 'Table has dropped');
-
-                        } else {
-                            throw new Error('This file doesn\'t exists');
-
-                        }
-                    });
-
-                } else {
-                    files.forEach((file) => {drop(require(path.join(migrationsPath, file)), path.join(configFile.DirectoryHelper, configFile.DBPath, '/db.sqlite'))});
-                    console.log("\x1b[32m%s\x1b[0m", 'Tables has dropped');
-
-                }
+                drop(files, migrationsPath, configFile);
 
             });
         },
