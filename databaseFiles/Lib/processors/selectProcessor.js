@@ -14,7 +14,7 @@ function compiler(this_actuallyProcess) {
             if(where.conditional === 'AND') sql += ' AND ';
             if(where.conditional === 'OR') sql += ' OR ';
 
-            sql += `${where.column} ${where.operator === undefined ? '=' : where.operator.toUpperCase()} `;
+            sql += `${where.column} ${where.operator.toUpperCase()} `;
             if(typeof where.value === 'string') {
                 if(where.operator === undefined) {
                     sql += `'${where.value}'`;
@@ -35,7 +35,7 @@ function compiler(this_actuallyProcess) {
         sql += ' ORDER BY ';
 
         this_actuallyProcess.order.forEach((order, index) => {
-            sql += `${order.column} ${order.order === undefined ? 'ASC' : order.order.toUpperCase()}`;
+            sql += `${order.column} ${order.order.toUpperCase()}`;
 
             if(index+1 !== this_actuallyProcess.order.length) {
                 sql += ', ';

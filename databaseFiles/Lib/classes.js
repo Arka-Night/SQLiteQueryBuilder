@@ -1,4 +1,4 @@
-const { insert } = require('./selectors');
+const { selection, insert } = require('./selectors');
 
 class Table {
     constructor(db, table) {
@@ -37,10 +37,11 @@ class Table {
             }
             */
         };
-
-        this.selection;
-        this.insert = insert;
+        
     }
+
+    selection = selection; 
+    insert = insert;
 
 }
 

@@ -92,6 +92,10 @@ class Connection {
 
     }
 
+    closeDb() {
+        this.db.close();
+    }
+
 }
 
 module.exports = Connection;
