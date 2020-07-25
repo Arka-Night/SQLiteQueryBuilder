@@ -11,7 +11,9 @@ function order(db, actuallyProcess, column, orderBy) {
     let Return = {
         select: async () => {
             return await select(db, actuallyProcess);
-        }
+        },
+        
+        order: (column, orderBy) => order(db, actuallyProcess, column, orderBy),
     };
 
     if(actuallyProcess.where === undefined) Return.where = (column, value, operator = '=') => {return where(db, actuallyProcess, column, value, operator)};
