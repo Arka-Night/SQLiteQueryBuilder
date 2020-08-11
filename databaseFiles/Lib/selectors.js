@@ -12,25 +12,11 @@ function selection(...data) {
     };
 
     return {
-        select: async () => {
-            return await select(db, actuallyProcess);
-        },
-        
-        where: (column, value, operator = '=') => {
-            return where(db, actuallyProcess, column, value, operator);
-        },
-
-        distinct: () => {
-            return distinct(db, actuallyProcess);
-        },
-
-        order: (column, orderBy = 'ASC') => {
-            return order(db, actuallyProcess, column, orderBy);
-        },
-
-        limit: (lm) => {
-            return limit(db, actuallyProcess, lm);
-        }
+        select: async () => await select(db, actuallyProcess),
+        where: (column, value, operator = '=') => where(db, actuallyProcess, column, value, operator),
+        distinct: () => distinct(db, actuallyProcess),
+        order: (column, orderBy = 'ASC') => order(db, actuallyProcess, column, orderBy),
+        limit: (lm) => limit(db, actuallyProcess, lm)
     };
 
 }

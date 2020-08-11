@@ -1,5 +1,4 @@
 const { maxLenght, autoIncrement, notNullable, primary, foreignKey } = require('./builderOptions');
-const compiler = require('./columnCompiler');
 
 class Column {
     constructor() {
@@ -19,10 +18,6 @@ class Column {
             } */
         };
 
-    }
-
-    getColumns() {
-        console.log(this.columns);
     }
 
     string(columnName) {
